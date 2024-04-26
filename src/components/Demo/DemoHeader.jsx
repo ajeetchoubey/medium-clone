@@ -5,6 +5,8 @@ import Auth from "./Auth/Auth";
 
 const DemoHeader = () => {
   const [isActive, setIsActive] = useState(false);
+  const [modal, setModal] = useState(false);
+
   useEffect(() => {
     const scrollMe = () => {
       window.scrollY > 50 ? setIsActive(true) : setIsActive(false);
@@ -33,12 +35,16 @@ const DemoHeader = () => {
             ))}
           </div>
           <div className=" relative">
-            <button className="hidden text-base font-semibold sm:flex items-center gap-5">
+            <button
+              onClick={() => setModal(true)}
+              className="hidden text-base font-semibold sm:flex items-center gap-5"
+            >
               Sign In
             </button>
-            <Auth />
+            <Auth modal={modal} setModal={setModal} />
           </div>
           <button
+           onClick={() => setModal(true)}
             className={`${
               isActive ? "bg-green-600" : "bg-black"
             } text-white rounded-full px-4 py-3 text-base font-semibold transition-all duration-500`}
