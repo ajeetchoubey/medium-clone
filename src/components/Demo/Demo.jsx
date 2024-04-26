@@ -1,53 +1,14 @@
-import React from 'react'
+import React from "react";
+import Banner from "./Banner";
+import Trending from "./Trending";
 
 const Demo = () => {
   return (
     <>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
-    <div>Demo</div>
+      <Banner />
+      <Trending />
     </>
-  )
-}
+  );
+};
 
-export default Demo
+export default Demo;
