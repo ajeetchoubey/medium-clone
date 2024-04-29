@@ -6,11 +6,42 @@ import { MdFacebook } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import { signInWithPopup } from "firebase/auth";
+import { auth, db, provider } from "../../../firebase/firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const Auth = ({modal, setModal}) => {
+const Auth = ({ modal, setModal }) => {
   const [createUser, setCreateUser] = useState(true);
   const [signReq, setSignReq] = useState("");
-  
+  const navigate = useNavigate();
+
+  const googleAuth = async () => {
+    try {
+      const createUser = await signInWithPopup(auth, provider);
+      const newUser = createUser.user;
+
+      const ref = doc(db, "users", newUser.uid);
+      const userDoc = await getDoc(ref);
+
+      if (!userDoc.exists()) {
+        await setDoc(ref, {
+          userId: newUser.uid,
+          username: newUser.displayName,
+          email: newUser.email,
+          userImg: newUser.photoURL,
+          bio: "",
+        });
+        navigate("/");
+        toast.success("User have been Signed In");
+        setModal(false);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   return (
     <Modal modal={modal} setModal={setModal}>
       <section
@@ -32,6 +63,7 @@ const Auth = ({modal, setModal}) => {
               </h2>
               <div className=" flex flex-col gap-2 w-fit mx-auto">
                 <Button
+                  click={googleAuth}
                   icon={<FcGoogle className=" text-2xl" />}
                   text={`${createUser ? "Sign Up" : "Sign In"} with Google`}
                 />
